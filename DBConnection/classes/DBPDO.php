@@ -15,14 +15,15 @@ class DBConnection extends PDO
         );
 		
         try {
-		    $this->db = new PDO($dsn, $config['user'], $config['password'], $options);
+		    $this->db = parent::__construct($dsn, $config['user'], $config['password'], $options);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
         }
     }
 	
-    public function closeConnection() {
-        $this->db = null;
+    public function closeConnection() 
+	{
+        unset($this->db);
     }
 }
 ?>
